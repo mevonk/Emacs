@@ -1,1 +1,12 @@
+(defun crafted-emacs-load-modules (modules)
+  "Initialize crafted-emacs modules.
 
+MODULES is a list of module names without the -packages or
+-config suffixes.  Note that any user-provided packages should be
+added to `package-selected-packages' before invoking this
+function."
+  (dolist (m modules)
+    (require (intern (format "crafted-%s-packages" m)) nil :noerror))
+  (package-install-selected-packages :noconfirm)
+  (dolist (m modules)
+    (require (intern (format "crafted-%s-config" m)) nil :noerror)))
