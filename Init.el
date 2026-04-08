@@ -1,3 +1,10 @@
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (and custom-file
+           (file-exists-p custom-file))
+  (load custom-file nil :nomessage))
+
+(load "~/.emacs.d/crafted-emacs/modules/crafted-init-config")
+
 (defun crafted-emacs-load-modules (modules)
   "Initialize crafted-emacs modules.
 
